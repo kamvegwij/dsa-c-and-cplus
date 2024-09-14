@@ -3,31 +3,28 @@
 #include <unordered_map>
 
 //COPY AND PASTE THIS CODE INTO THE MAIN SOURCE FILE.
-struct City
+struct Company
 {
-	std::string Name = "";
-	uint64_t totalPopulation = 0;
-	double Latitude = 0.0, Longitude = 0.0;
+	std::string regID = "";
+	std::string companyName = "default";
+	std::string performanceStatus = ""; //average, low, high.
+	uint64_t totalStaff = 0;
+	double turnover = 0.0; //in $
 };
 
 int main()
 {	
-	City city1 = { "Cape Town", 2500, -33.45, 13.75 };//dummy values.
-	City city2 = { "Joburg", 1560, 45.59, 26.76 };
-	City city3 = { "Gqeberha", 456, 55.58, 16.76 };
-	City city4 = { "Komani", 2908, 78.59, 34.32 };
+	Company company1 = {"123et89LTD", "Ranger Ltd." ,"average", 100, 50000.00};//dummy values.
+	Company company2 = {"003nu54LTD", "Peach Ltd.", "low", 1000, 401000.60 };
+	Company company3 = {"h_w986eu7LLC", "HomeWork LLC", "high", 100, 1500000.00 };
+	Company company4 = {"15b800a", "OurCompany Ltd.", "average", 245, 12500.00 };
+	Company company5 = {"mover500LTD", "Movers", "average", 10000, 2000479.00 };
 
-	std::unordered_map<std::string, City> citiesMap; //keys have to be hashable.
+	//create a hastable to store the companies:
+	std::unordered_map<std::string, Company> registeredCompanies;
 
-	citiesMap["Cape Town"] = City{ "Cape Town", 2500, -33.45, 13.75 };
-	citiesMap["Joburg"] = City{ "Joburg", 1560, 45.59, 26.76 };
-	citiesMap["Gqeberha"] = City{ "Gqeberha", 456, 55.58, 16.76 };
-	citiesMap["Komani"] = City{ "Komani", 2908, 78.59, 34.32 };
 
-	//declare and init a reference to a city:
-	City& refCapeTown = citiesMap["Cape Town"];
 
-	std::cout << refCapeTown.Name << std::endl;
 
 	return 0;
 }
