@@ -3,18 +3,26 @@
 ---
 > In C++ a hashtable can be implemented using std::unordered_map
 ```
+struct SomeStruct{
+	int uID = 0;
+	std::string Name = "";
+};
 #include <unordered_map>
 int main(){
 	std::unordered_map<int, std::string> myTable;
-	myTable[0] = "Kamve";
-	myTable[1] = "Developer";
+	myTable[0] = {0, "Kamve"};
+	myTable[1] = (1, "Developer"};
+}
+```
+> Iteration: C++ 17 and above
+```
+for (auto& [ky, SomeStruct] : myTable)
+{
+	std::cout << ky << std::endl << SomeStruct.Name;
 }
 ```
 > NOTE: When using a hashtable, keys have to be hashable.[^1]
 ```
-struct SomeStruct{
-	std::string Name = "";
-};
 namespace std {
 	template<>
 	struct hash<SomeStruct> {
