@@ -5,7 +5,7 @@
 ```
 #include <unordered_map>
 int main(){
-	std::unordered_map<int key, std::string val> myTable;
+	std::unordered_map<int, std::string> myTable;
 	myTable[0] = "Kamve";
 	myTable[1] = "Developer";
 }
