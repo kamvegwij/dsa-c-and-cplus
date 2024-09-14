@@ -1,41 +1,54 @@
-/*
-	KAMVE:
-		Practicing DSA and common real-life uses cases of data structures along
-		with their most common algorithms.
-*/
 #include <iostream>
-#include "Headers/Hashtables.h"
+#include <unordered_map>
+#include <map>
 
-struct Company
+class testing_maps
 {
-	int regID = 0;
-	std::string companyName = "default";
-	std::string performanceStatus = ""; //average, low, high.
-	uint64_t totalStaff = 0;
-	double turnover = 0.0; //in $
+private:
+	std::map<int, int> dummy_map;//ordered map.
+
+public:
+	testing_maps(int const& r) {}
+	void RandomiseAssign(std::map<int, int>& new_map, int n_size);
+
+	std::map<int, int>::iterator map_iterator;
+
+	void do_insert(std::map<int,int> &temp_map, const int &key, int value)
+	{
+		//if not changing a key then we can declare the reference to it as a constant.
+		//get by value makes an extra copy, impacting performance.
+		auto return_val = temp_map.insert({ key, value }); //returns->std::pair<std::map<int,int>::iterator, bool>
+	}
 };
+
+void testing_maps::RandomiseAssign(std::map<int, int> &new_map, int n_size)
+{
+	int random_integer = 0;
+	srand(500);
+	for (int x = 0; x < n_size; x++)
+	{
+		random_integer = rand();
+		do_insert(new_map, x+1, random_integer);
+	}
+}
 
 int main()
 {
-	Company company1 = { 0, "Ranger Ltd." ,"average", 100, 50000.00 };//dummy values.
-	Company company2 = { 1, "Peach Ltd.", "low", 1000, 401000.60 };
-	Company company3 = { 2, "HomeWork LLC", "high", 100, 1500000.00 };
-	Company company4 = { 3, "OurCompany Ltd.", "average", 245, 12500.00 };
-	Company company5 = { 4, "Movers", "average", 10000, 2000479.00 };
+	std::map<int, int> new_map;
 
-	//create a hastable to store the companies:
-	std::unordered_map<int, Company> registeredCompanies;
+	testing_maps obj(5);
+	obj.RandomiseAssign(new_map, 10);
 
-	registeredCompanies[0] = (company1);
-	registeredCompanies[1] = (company2);
-	registeredCompanies[2] = (company3);
-	registeredCompanies[3] = (company4);
-	registeredCompanies[4] = (company5);
+	std::cout << "Length of map: " << new_map.size() << std::endl;
+	//new_map.erase(8);
+	std::cout << "Length of map: " << new_map.size() << std::endl;
 
-	//iterate through map
-	for (auto& [regID, Company] : registeredCompanies) {
+	//iterators in C++
+	//std::map<int, int>::iterator i = new_map.begin();
+	for (auto i = new_map.begin(); i != new_map.end(); i++)
+		std::cout << "Key: " << i->first << " Value: " << i->second << std::endl;
 
-	}
-
-	return 0;
+	auto some_iterator = new_map.find(1);
+	if (some_iterator != new_map.end())
+		std::cout << some_iterator->second << std::endl;
 }
